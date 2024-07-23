@@ -14,7 +14,7 @@ namespace Ui {
 class InfoWindow;
 }
 
-class InfoWindow : public QWidget
+class InfoWindow : public QDialog
 {
     Q_OBJECT
 
@@ -28,7 +28,6 @@ private:
     QString oldestDate;
     std::map<int, int> groupedByYearSatellites;
     std::map<int, int> groupedByInclinationSatellites;
-    // void closeEvent(QCloseEvent *);
 
 private slots:
     void saveToFile();

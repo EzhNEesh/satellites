@@ -2,7 +2,7 @@
 #include "ui_infowindow.h"
 
 InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::InfoWindow)
 {
     ui->setupUi(this);
@@ -68,10 +68,6 @@ void InfoWindow::saveToFile() {
         file.close();
     }
 }
-
-// void InfoWindow::closeEvent(QCloseEvent *event) {
-//     this->deleteLater();
-// }
 
 InfoWindow::~InfoWindow()
 {

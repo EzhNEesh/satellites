@@ -58,7 +58,7 @@ void MainWindow::showInfoClicked() {
 }
 
 void MainWindow::dataReceived(std::vector<Satellite> satellites) {
-    InfoWindow *iWindow = new InfoWindow(satellites);
+    InfoWindow *iWindow = new InfoWindow(satellites, this);
     iWindow->setAttribute(Qt::WA_DeleteOnClose);
     iWindow->show();
     showInfoButton->setDisabled(false);
