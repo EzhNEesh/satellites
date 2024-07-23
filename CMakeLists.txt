@@ -15,19 +15,19 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        ${CMAKE_SOURCE_DIR}/src/main.cpp
+        ${CMAKE_SOURCE_DIR}/src/mainwindow.cpp
+        ${CMAKE_SOURCE_DIR}/src/mainwindow.h
+        ${CMAKE_SOURCE_DIR}/src/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(satellites
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        infowindow.h infowindow.cpp infowindow.ui
-        satellite.h satellite.cpp
-        tlereader.h tlereader.cpp
+        ${CMAKE_SOURCE_DIR}/src/infowindow.h ${CMAKE_SOURCE_DIR}/src/infowindow.cpp ${CMAKE_SOURCE_DIR}/src/infowindow.ui
+        ${CMAKE_SOURCE_DIR}/src/satellite.h ${CMAKE_SOURCE_DIR}/src/satellite.cpp
+        ${CMAKE_SOURCE_DIR}/src/tlereader.h ${CMAKE_SOURCE_DIR}/src/tlereader.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET satellites APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -28,7 +28,7 @@ private:
     QString oldestDate;
     std::map<int, int> groupedByYearSatellites;
     std::map<int, int> groupedByInclinationSatellites;
-    void closeEvent(QCloseEvent *);
+    // void closeEvent(QCloseEvent *);
 
 private slots:
     void saveToFile();

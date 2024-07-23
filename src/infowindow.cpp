@@ -69,9 +69,9 @@ void InfoWindow::saveToFile() {
     }
 }
 
-void InfoWindow::closeEvent(QCloseEvent *event) {
-    this->deleteLater();
-}
+// void InfoWindow::closeEvent(QCloseEvent *event) {
+//     this->deleteLater();
+// }
 
 InfoWindow::~InfoWindow()
 {
