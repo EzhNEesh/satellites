@@ -10,7 +10,10 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     : QDialog(parent)
 {
     setWindowTitle("Statistic");
-    QGridLayout *mainLayout = new QGridLayout(this);
+
+    QWidget *centralWidget = new QWidget(this);
+    centralWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    QGridLayout *mainLayout = new QGridLayout(centralWidget);
 
     satellitesCount = satellites.size();
     QLabel *countLabelText = new QLabel("Count of satellites: ", this);
@@ -50,8 +53,8 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     mainLayout->addWidget(saveToFileButton, curRow, 0);
     curRow++;
 
-    setMinimumHeight(curRow * 35);
-    setMinimumWidth(400);
+    centralWidget->resize(400, curRow * 35);
+    setMinimumSize(400, curRow * 35);
 }
 
 void InfoWindow::saveToFile() {
