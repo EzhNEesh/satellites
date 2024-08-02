@@ -44,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     setCentralWidget(centralWidget);
     errorWindow = new QMessageBox(this);
+
+    setMinimumSize(400, 200);
 }
 
 void MainWindow::showInfoClicked() {

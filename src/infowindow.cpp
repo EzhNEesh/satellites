@@ -49,6 +49,9 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     connect(saveToFileButton, &QPushButton::released, this, &InfoWindow::saveToFile);
     mainLayout->addWidget(saveToFileButton, curRow, 0);
     curRow++;
+
+    setMinimumHeight(curRow * 35);
+    setMinimumWidth(400);
 }
 
 void InfoWindow::saveToFile() {
