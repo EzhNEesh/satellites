@@ -1,18 +1,14 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
-// #include <QFileDialog>
 #include <math.h>
 #include <fstream>
 
 #include "infowindow.h"
-#include "ui_infowindow.h"
 
 InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::InfoWindow)
 {
-    ui->setupUi(this);
     setWindowTitle("Statistic");
     QGridLayout *mainLayout = new QGridLayout(this);
 
@@ -76,7 +72,4 @@ void InfoWindow::saveToFile() {
     }
 }
 
-InfoWindow::~InfoWindow()
-{
-    delete ui;
-}
+InfoWindow::~InfoWindow() {}

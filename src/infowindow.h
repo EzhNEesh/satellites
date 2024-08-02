@@ -6,10 +6,6 @@
 
 #include "tlereader.h"
 
-namespace Ui {
-class InfoWindow;
-}
-
 class InfoWindow : public QDialog
 {
     Q_OBJECT
@@ -19,7 +15,6 @@ public:
     ~InfoWindow();
 
 private:
-    Ui::InfoWindow *ui;
     int satellitesCount;
     QString oldestDate;
     std::map<int, int> groupedByYearSatellites;

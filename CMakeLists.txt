@@ -16,13 +16,12 @@ set(PROJECT_SOURCES
         ${CMAKE_SOURCE_DIR}/src/main.cpp
         ${CMAKE_SOURCE_DIR}/src/mainwindow.cpp
         ${CMAKE_SOURCE_DIR}/src/mainwindow.h
-        ${CMAKE_SOURCE_DIR}/src/mainwindow.ui
 )
 
 qt_add_executable(satellites
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
-    ${CMAKE_SOURCE_DIR}/src/infowindow.h ${CMAKE_SOURCE_DIR}/src/infowindow.cpp ${CMAKE_SOURCE_DIR}/src/infowindow.ui
+    ${CMAKE_SOURCE_DIR}/src/infowindow.h ${CMAKE_SOURCE_DIR}/src/infowindow.cpp
     ${CMAKE_SOURCE_DIR}/src/satellite.h ${CMAKE_SOURCE_DIR}/src/satellite.cpp
     ${CMAKE_SOURCE_DIR}/src/tlereader.h ${CMAKE_SOURCE_DIR}/src/tlereader.cpp
 )
