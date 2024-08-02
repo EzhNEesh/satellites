@@ -2,6 +2,7 @@
 #include <fstream>
 
 #include "tlereader.h"
+#include "satellite.h"
 
 TLEReader::TLEReader(QObject *parent) : QObject(parent) {
     networkManager = new QNetworkAccessManager();

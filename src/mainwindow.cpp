@@ -2,6 +2,7 @@
 #include <QPushButton>
 
 #include "mainwindow.h"
+#include "infowindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

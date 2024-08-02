@@ -8,7 +8,7 @@
 #include <QRadioButton>
 #include <QMessageBox>
 
-#include "infowindow.h"
+#include "tlereader.h"
 
 class MainWindow : public QMainWindow
 {

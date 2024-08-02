@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QFileDialog>
 
-#include "tlereader.h"
+#include "satellite.h"
 
 class InfoWindow : public QDialog
 {
