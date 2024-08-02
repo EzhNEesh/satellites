@@ -1,6 +1,3 @@
-#include <QGridLayout>
-#include <QLabel>
-#include <QPushButton>
 #include <math.h>
 #include <fstream>
 
@@ -11,23 +8,23 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
 {
     setWindowTitle("Statistic");
 
-    QWidget *centralWidget = new QWidget(this);
+    centralWidget = new QWidget(this);
     centralWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    QGridLayout *mainLayout = new QGridLayout(centralWidget);
+    mainLayout = new QGridLayout(centralWidget);
 
     satellitesCount = satellites.size();
-    QLabel *countLabelText = new QLabel("Count of satellites: ", this);
-    QLabel *countLabelValue = new QLabel(QString::number(satellitesCount), this);
+    countLabelText = new QLabel("Count of satellites: ", this);
+    countLabelValue = new QLabel(QString::number(satellitesCount), this);
     mainLayout->addWidget(countLabelText, 0, 0);
     mainLayout->addWidget(countLabelValue, 0, 1);
 
     oldestDate = Satellite::getOldestDate(satellites).toString("dd.MM.yyyy");
-    QLabel *oldestDataDateText = new QLabel("The oldest download data date: ", this);
-    QLabel *oldestDataDateValue = new QLabel(oldestDate, this);
+    oldestDataDateText = new QLabel("The oldest download data date: ", this);
+    oldestDataDateValue = new QLabel(oldestDate, this);
     mainLayout->addWidget(oldestDataDateText, 1, 0);
     mainLayout->addWidget(oldestDataDateValue, 1, 1);
 
-    QLabel *yearGroupedText = new QLabel("Count of satellites grouped by year: ", this);
+    yearGroupedText = new QLabel("Count of satellites grouped by year: ", this);
     mainLayout->addWidget(yearGroupedText, 2, 0);
     int curRow = 2;
     groupedByYearSatellites = Satellite::groupByDate(satellites);
@@ -38,7 +35,7 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
         curRow++;
     }
 
-    QLabel *inclinationText = new QLabel("Count of satellites grouped by inclination: ", this);
+    inclinationText = new QLabel("Count of satellites grouped by inclination: ", this);
     mainLayout->addWidget(inclinationText, curRow, 0);
     groupedByInclinationSatellites = Satellite::groupByInclination(satellites);
     for (auto &[inc, sc] : groupedByInclinationSatellites) {
@@ -47,7 +44,7 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
         curRow++;
     }
 
-    QPushButton *saveToFileButton = new QPushButton("Save to file", this);
+    saveToFileButton = new QPushButton("Save to file", this);
     saveToFileButton->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     connect(saveToFileButton, &QPushButton::released, this, &InfoWindow::saveToFile);
     mainLayout->addWidget(saveToFileButton, curRow, 0);

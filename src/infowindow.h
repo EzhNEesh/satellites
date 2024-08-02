@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QFileDialog>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPushButton>
 
 #include "satellite.h"
 
@@ -19,6 +22,16 @@ private:
     QString oldestDate;
     std::map<int, int> groupedByYearSatellites;
     std::map<int, int> groupedByInclinationSatellites;
+
+    QWidget *centralWidget;
+    QGridLayout *mainLayout;
+    QLabel *countLabelText;
+    QLabel *countLabelValue;
+    QLabel *oldestDataDateText;
+    QLabel *oldestDataDateValue;
+    QLabel *yearGroupedText;
+    QLabel *inclinationText;
+    QPushButton *saveToFileButton;
 
 private slots:
     void saveToFile();
