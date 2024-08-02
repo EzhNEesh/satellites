@@ -12,21 +12,22 @@ MainWindow::MainWindow(QWidget *parent)
     connect(tleReader, &TLEReader::dataIsReady, this, &MainWindow::dataReceived);
     connect(tleReader, &TLEReader::errorOcurred, this, &MainWindow::showErrorWindow);
 
-    centralWidget = new QWidget();
+    centralWidget = new QWidget(this);
     centralWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    centralWidget->setMaximumSize(450, 150);
     mainLayout = new QGridLayout(centralWidget);
 
     pathLabel = new QLabel("Input path to data: ");
-    pathLabel->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred));
+    pathLabel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     mainLayout->addWidget(pathLabel, 0, 0);
 
     pathInput = new QLineEdit();
-    pathInput->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum));
+    pathInput->setSizePolicy(QSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed));
+    // pathInput->resize(100, 0);
+
     mainLayout->addWidget(pathInput, 0, 1);
 
     choosePathType = new QGroupBox();
-    choosePathType->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum));
+    choosePathType->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     fileRadio = new QRadioButton("File source");
     urlRadio = new QRadioButton("Web source");
     fileRadio->setChecked(true);
@@ -46,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(centralWidget);
     errorWindow = new QMessageBox(this);
 
+    centralWidget->setMaximumHeight(200);
     setMinimumSize(400, 200);
 }
 
