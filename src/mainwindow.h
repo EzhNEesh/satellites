@@ -33,7 +33,7 @@ private:
 
 private slots:
     void showInfoClicked();
-    void dataReceived(std::vector<Satellite>);
-    void showErrorWindow(const QString &);
+    void dataReceived(std::vector<Satellite> satellites);
+    void showErrorWindow(const QString &message);
 };
 #endif // MAINWINDOW_H

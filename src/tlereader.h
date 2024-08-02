@@ -14,8 +14,8 @@ class TLEReader : public QObject
 
 public:
     explicit TLEReader(QObject *parent = nullptr);
-    void fromFile(const QString &);
-    void fromURL(const QString &);
+    void fromFile(const QString &filePath);
+    void fromURL(const QString &URL);
     ~TLEReader();
 
 private slots:
@@ -23,13 +23,13 @@ private slots:
     void connectionError();
 
 signals:
-    void dataIsReady(const std::vector<Satellite> &);
-    void errorOcurred(const QString &);
+    void dataIsReady(const std::vector<Satellite> &data);
+    void errorOcurred(const QString &errorMessage);
 
 private:
     QNetworkAccessManager *networkManager;
-    Satellite createSatellite(const QString &, const QString &, const QString &);
-    QString preprocessRow(QString &);
+    Satellite createSatellite(const QString &name, const QString &row1, const QString &row2);
+    QString preprocessRow(QString &row);
 };
 
 #endif // TLEREADER_H

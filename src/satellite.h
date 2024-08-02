@@ -8,15 +8,15 @@
 class Satellite
 {
 public:
-    explicit Satellite(const QString &);
-    void parseAndSetFirstRow(const QString &);
-    void parseAndSetSecondRow(const QString &);
+    explicit Satellite(const QString &_name);
+    void parseAndSetFirstRow(const QString &row);
+    void parseAndSetSecondRow(const QString &row);
     int getYearLaunch();
     QDate getDataDate();
     float getInclination();
-    static QDate getOldestDate(std::vector<Satellite> &);
-    static std::map<int, int> groupByDate(std::vector<Satellite> &);
-    static std::map<int, int> groupByInclination(std::vector<Satellite> &);
+    static QDate getOldestDate(std::vector<Satellite> &satellites);
+    static std::map<int, int> groupByDate(std::vector<Satellite> &satellites);
+    static std::map<int, int> groupByInclination(std::vector<Satellite> &satellites);
 
 private:
     QString name;
@@ -28,7 +28,7 @@ private:
     int yearOfTheEra;
     std::pair<int, int> timeOfEra;
     float inclination;
-    bool checkControlSum(const QString &);
+    bool checkControlSum(const QString &row);
 };
 
 #endif // SATELLITE_H
