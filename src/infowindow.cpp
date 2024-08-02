@@ -1,3 +1,10 @@
+#include <QGridLayout>
+#include <QLabel>
+#include <QPushButton>
+// #include <QFileDialog>
+#include <math.h>
+#include <fstream>
+
 #include "infowindow.h"
 #include "ui_infowindow.h"
 

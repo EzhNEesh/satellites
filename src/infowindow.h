@@ -2,11 +2,7 @@
 #define INFOWINDOW_H
 
 #include <QWidget>
-#include <QGridLayout>
-#include <QLabel>
-#include <QPushButton>
 #include <QFileDialog>
-#include <math.h>
 
 #include "tlereader.h"
 

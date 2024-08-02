@@ -1,8 +1,6 @@
 #ifndef TLEREADER_H
 #define TLEREADER_H
 
-#include <iostream>
-#include <fstream>
 #include <vector>
 #include <QObject>
 #include <QNetworkAccessManager>
@@ -27,8 +25,6 @@ private slots:
 signals:
     void dataIsReady(const std::vector<Satellite> &);
     void errorOcurred(const QString &);
-
-    // void readingError(QString);
 
 private:
     QNetworkAccessManager *networkManager;

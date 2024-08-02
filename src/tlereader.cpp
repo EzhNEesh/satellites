@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+
 #include "tlereader.h"
 
 TLEReader::TLEReader(QObject *parent) : QObject(parent) {
