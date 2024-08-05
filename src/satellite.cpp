@@ -26,7 +26,7 @@ void Satellite::parseAndSetFirstRow(const QString &row) {
     if (checkControlSum(row)) {
         number = row.sliced(2, 5).toInt();
         classification = row.sliced(7, 1).trimmed();
-        yearLaunch = row.sliced(9, 2).toInt();
+        yearLaunch = row.sliced(9, 2).toInt() > 30 ? row.sliced(9, 2).toInt() + 1900 : row.sliced(9, 2).toInt() + 2000;
         numberInYearLaunch = row.sliced(11, 3).toInt();
         partInYearLaunch = row.sliced(14, 3);
         yearOfTheEra = row.sliced(18, 2).toInt();

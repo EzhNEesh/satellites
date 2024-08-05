@@ -29,8 +29,7 @@ InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     int curRow = 2;
     groupedByYearSatellites = Satellite::groupByDate(satellites);
     for (auto &[year, sc] : groupedByYearSatellites) {
-        int correctYear = year > 30 ? year + 1900 : year + 2000;
-        QLabel *yearGroupedValue = new QLabel(QString::number(correctYear) + ": " + QString::number(sc), this);
+        QLabel *yearGroupedValue = new QLabel(QString::number(year) + ": " + QString::number(sc), this);
         mainLayout->addWidget(yearGroupedValue, curRow, 1);
         curRow++;
     }
@@ -64,8 +63,7 @@ void InfoWindow::saveToFile() {
         file << "The oldest download data date: " << oldestDate.toStdString() << std::endl;
         file << "Count of satellites grouped by year: " << std::endl;
         for (auto &[year, sc] : groupedByYearSatellites) {
-            int correctYear = year > 30 ? year + 1900 : year + 2000;
-            file << correctYear << ": " << sc << std::endl;
+            file << year << ": " << sc << std::endl;
         }
         file << "Count of satellites grouped by inclination: " << std::endl;
         for (auto &[inc, sc] : groupedByInclinationSatellites) {
