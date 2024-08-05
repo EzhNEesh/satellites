@@ -29,7 +29,7 @@ void Satellite::parseAndSetFirstRow(const QString &row) {
         yearLaunch = row.sliced(9, 2).toInt() > 30 ? row.sliced(9, 2).toInt() + 1900 : row.sliced(9, 2).toInt() + 2000;
         numberInYearLaunch = row.sliced(11, 3).toInt();
         partInYearLaunch = row.sliced(14, 3);
-        yearOfTheEra = row.sliced(18, 2).toInt();
+        yearOfTheEra = row.sliced(18, 2).toInt() > 30 ? row.sliced(18, 2).toInt() + 1900 : row.sliced(18, 2).toInt() + 2000;
         timeOfEra = std::pair<int, int> (row.sliced(20, 3).toInt(), row.sliced(24, 8).toInt());
     } else {
         throw std::logic_error("Satellite " + name.toStdString() + ": First row checksum error");
@@ -56,8 +56,7 @@ int Satellite::getYearLaunch() {
 }
 
 QDate Satellite::getDataDate() {
-    int correctYear = yearOfTheEra > 30 ? yearOfTheEra + 1900 : yearOfTheEra + 2000;
-    return QDate{correctYear, 1, 1}.addDays(timeOfEra.first);
+    return QDate{yearOfTheEra, 1, 1}.addDays(timeOfEra.first);
 }
 
 float Satellite::getInclination() {
