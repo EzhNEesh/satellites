@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
+#include <map>
 
-#include "tlereader.h"
+#include "tleparser.h"
 #include "satellite.h"
 
-TLEReader::TLEReader(QObject *parent) : QObject(parent) {
+TLEParser::TLEParser(QObject *parent) : QObject(parent) {
     networkManager = new QNetworkAccessManager();
 }
 
-void TLEReader::fromFile(const QString &filePath) {
+void TLEParser::fromFile(const QString &filePath) {
     std::ifstream file(filePath.toStdString());
     std::vector <Satellite> satellites;
     if (file.is_open()) {
@@ -45,13 +46,36 @@ void TLEReader::fromFile(const QString &filePath) {
     }
 }
 
-void TLEReader::fromURL(const QString &URL) {
-    connect(networkManager, &QNetworkAccessManager::finished, this, &TLEReader::requestFinished);
+void TLEParser::fromURL(const QString &URL) {
+    connect(networkManager, &QNetworkAccessManager::finished, this, &TLEParser::requestFinished);
     QNetworkReply* reply = networkManager->get(QNetworkRequest(QUrl(URL)));
-    connect(reply, &QNetworkReply::errorOccurred, this, &TLEReader::connectionError);
+    connect(reply, &QNetworkReply::errorOccurred, this, &TLEParser::connectionError);
 }
 
-void TLEReader::requestFinished(QNetworkReply *reply) {
+void TLEParser::saveToFile(const QString &pathToSave,
+                           const int &satellitesCount,
+                           const QString &oldestDate,
+                           std::map<int, int> groupedByYearSatellites,
+                           std::map<int, int> groupedByInclinationSatellites) {
+    std::ofstream file(pathToSave.toStdString());
+    if (file.is_open()) {
+        file << "Count of satellites: " << satellitesCount << std::endl;
+        file << "The oldest download data date: " << oldestDate.toStdString() << std::endl;
+        file << "Count of satellites grouped by year: " << std::endl;
+        for (auto &[year, sc] : groupedByYearSatellites) {
+            file << year << ": " << sc << std::endl;
+        }
+        file << "Count of satellites grouped by inclination: " << std::endl;
+        for (auto &[inc, sc] : groupedByInclinationSatellites) {
+            file << inc << ": " << sc << std::endl;
+        }
+        file.close();
+    } else {
+        emit errorOcurred(pathToSave + ": could not to save file");
+    }
+}
+
+void TLEParser::requestFinished(QNetworkReply *reply) {
     QVariant statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
     if (statusCode.isValid()) {
         QString replyHtml = reply->readAll();
@@ -83,11 +107,11 @@ void TLEReader::requestFinished(QNetworkReply *reply) {
     }
 }
 
-void TLEReader::connectionError() {
+void TLEParser::connectionError() {
     emit errorOcurred("Connection error");
 }
 
-Satellite TLEReader::createSatellite(const QString &name, const QString &row1, const QString &row2) {
+Satellite TLEParser::createSatellite(const QString &name, const QString &row1, const QString &row2) {
     Satellite satellite{name};
     satellite.parseAndSetFirstRow(row1);
     satellite.parseAndSetSecondRow(row2);
@@ -95,8 +119,8 @@ Satellite TLEReader::createSatellite(const QString &name, const QString &row1, c
     return satellite;
 }
 
-QString TLEReader::preprocessRow(QString &row) {
+QString TLEParser::preprocessRow(QString &row) {
     return row.replace("\r", "");
 }
 
-TLEReader::~TLEReader(){}
+TLEParser::~TLEParser(){}

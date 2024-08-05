@@ -2,6 +2,7 @@
 #include <fstream>
 
 #include "infowindow.h"
+#include "tleparser.h"
 
 InfoWindow::InfoWindow(std::vector<Satellite> &satellites, QWidget *parent)
     : QDialog(parent)
@@ -57,20 +58,8 @@ void InfoWindow::saveToFile() {
     QString filePath = QFileDialog::getSaveFileName(this,
                                                     "Save satellites statistic", "",
                                                     "Text (*.txt)");
-    std::ofstream file(filePath.toStdString());
-    if (file.is_open()) {
-        file << "Count of satellites: " << satellitesCount << std::endl;
-        file << "The oldest download data date: " << oldestDate.toStdString() << std::endl;
-        file << "Count of satellites grouped by year: " << std::endl;
-        for (auto &[year, sc] : groupedByYearSatellites) {
-            file << year << ": " << sc << std::endl;
-        }
-        file << "Count of satellites grouped by inclination: " << std::endl;
-        for (auto &[inc, sc] : groupedByInclinationSatellites) {
-            file << inc << ": " << sc << std::endl;
-        }
-        file.close();
-    }
+    TLEParser tleParser;
+    tleParser.saveToFile(filePath, satellitesCount, oldestDate, groupedByYearSatellites, groupedByInclinationSatellites);
 }
 
 InfoWindow::~InfoWindow() {}

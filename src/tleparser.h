@@ -1,5 +1,5 @@
-#ifndef TLEREADER_H
-#define TLEREADER_H
+#ifndef TLEPARSER_H
+#define TLEPARSER_H
 
 #include <vector>
 #include <QObject>
@@ -8,15 +8,20 @@
 
 #include "satellite.h"
 
-class TLEReader : public QObject
+class TLEParser : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit TLEReader(QObject *parent = nullptr);
+    explicit TLEParser(QObject *parent = nullptr);
     void fromFile(const QString &filePath);
     void fromURL(const QString &URL);
-    ~TLEReader();
+    void saveToFile(const QString &pathToSave,
+                           const int &satellitesCount,
+                           const QString &oldestDate,
+                           std::map<int, int> groupedByYearSatellites,
+                           std::map<int, int> groupedByInclinationSatellites);
+    ~TLEParser();
 
 private slots:
     void requestFinished(QNetworkReply *reply);
@@ -32,4 +37,4 @@ private:
     QString preprocessRow(QString &row);
 };
 
-#endif // TLEREADER_H
+#endif // TLEPARSER_H

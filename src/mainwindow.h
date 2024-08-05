@@ -8,7 +8,7 @@
 #include <QRadioButton>
 #include <QMessageBox>
 
-#include "tlereader.h"
+#include "tleparser.h"
 
 class MainWindow : public QMainWindow
 {
@@ -28,7 +28,7 @@ private:
     QRadioButton *fileRadio;
     QRadioButton *urlRadio;
     QPushButton *showInfoButton;
-    TLEReader *tleReader;
+    TLEParser *tleParser;
     QMessageBox *errorWindow;
 
 private slots:

@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setWindowTitle("Satellites");
-    tleReader = new TLEReader(this);
-    connect(tleReader, &TLEReader::dataIsReady, this, &MainWindow::dataReceived);
-    connect(tleReader, &TLEReader::errorOcurred, this, &MainWindow::showErrorWindow);
+    tleParser = new TLEParser(this);
+    connect(tleParser, &TLEParser::dataIsReady, this, &MainWindow::dataReceived);
+    connect(tleParser, &TLEParser::errorOcurred, this, &MainWindow::showErrorWindow);
 
     centralWidget = new QWidget(this);
     centralWidget->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
@@ -54,9 +54,9 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::showInfoClicked() {
     showInfoButton->setDisabled(true);
     if (fileRadio->isChecked()) {
-        tleReader->fromFile(pathInput->text());
+        tleParser->fromFile(pathInput->text());
     } else {
-        tleReader->fromURL(pathInput->text());
+        tleParser->fromURL(pathInput->text());
     }
 }
 
